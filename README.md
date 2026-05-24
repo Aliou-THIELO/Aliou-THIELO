@@ -1,16 +1,16 @@
-## Hi there 👋
+# Hi, I'm Aliou THIELO 👋
 
-<!--
-**Aliou-THIELO/Aliou-THIELO** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+M1 Statistical Modeling & Data Science student  
+UCAD Dakar · Partnership with Université de Lille, France
 
-Here are some ideas to get you started:
+Currently training as a Data Engineer | Python · SQL · dBT · AWS
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## What I'm building right now
+- Learning: Python for production, Git, Parquet format
+- Project in progress: weather data ingestion pipeline — Dakar, Senegal
+
+## Current stack
+Python · SQL · Pandas · Git
+
+## Contact
+- Email: thieloaliou25@gmail.com
