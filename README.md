@@ -41,8 +41,8 @@ The FCFA is pegged to the euro at a fixed parity guaranteed by the French Treasu
 
 | # | Project | Stack | Status |
 |---|---|---|---|
-| P1 | [📥 FCFA Exchange Rate Ingestion](https://github.com/Aliou-THIELO/p1-fcfa-exchange-rate) | Python · REST API · Pydantic · Parquet | 🔄 In progress |
-| P2 | 🔄 Data Transformation Layer | dbt · DuckDB · PostgreSQL · 3-layer architecture | ⏳ Planned |
+| P1 | [📥 FCFA Exchange Rate Ingestion](https://github.com/Aliou-THIELO/p1-fcfa-exchange-rate) | Python · REST API · Pydantic · Parquet | ✅ Done |
+| P2 | 🔄 Data Transformation Layer | dbt (DuckDB for dev, PostgreSQL for prod) · 3-layer architecture | ⏳ Planned |
 | — | 🔍 Exploratory Data Analysis | Streamlit | ⏳ Planned |
 | P3 | ⚙️ Pipeline Orchestration | Apache Airflow · Docker | ⏳ Planned |
 | — | 📊 Business Dashboard | Power BI (fed by the orchestrated, automated pipeline) | ⏳ Planned |
@@ -100,8 +100,8 @@ The pipeline architecture itself is domain-agnostic — the same ingestion → t
 
 ## 📈 Current Focus
 
-- ✅ P1 ingestion client complete — robust API client with retry logic, custom exception handling, and structured logging
-- 🔄 Adding Pydantic validation layer to P1
+- ✅ P1 complete — API client with retry logic and structured logging, Pydantic validation, Parquet export
+- 🔜 Starting P2 — dbt transformation layer on top of P1's Parquet output
 
 ## 📫 Let's Connect
 
