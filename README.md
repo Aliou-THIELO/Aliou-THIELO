@@ -1,107 +1,104 @@
-# Aliou THIELO — Data Engineer & MLOps 🇸🇳
+Aliou THIELO — Data Engineer & MLOps 🇸🇳
+<p>🎓 M2 Modélisation Statistique et Informatique, option Data Science — Double Degree UCAD Dakar · Université de Lille, France</p> <p>🎓 Licence 3 Informatique, Systèmes d'Information — UGB</p> <p>📚 Data Engineering Training — Force-N Program</p> <p>💼 Intern, AI & Data Engineering — Xarala Talent Camp, Summer 2026 (completed)</p> <p>📍 Dakar, Senegal</p> ---
+👋 About Me
 
-<p>🎓 M1 Statistical Modeling & Computer Science, Data Science Track — Double Degree UCAD Dakar · Université de Lille, France</p>
-<p>📚 Data Engineering Training — Force-N Program (in progress)</p>
-<p>📍 Dakar, Senegal</p>
----
+I'm a Data Engineer in training based in Dakar, Senegal, building reliable data pipelines — from API and web ingestion to validation, storage and a business-facing visualization layer for decision-makers.
 
-## 👋 About Me
+My focus is Data Engineering and MLOps for data-driven organisations in West Africa and beyond — fintech and banking, agriculture, health, public sector. I am currently learning transformation (dbt), orchestration (Airflow) and cloud (AWS), with the AWS Certified Data Engineer – Associate as my next certification goal.
 
-I'm a Data Engineer in training based in Dakar, Sénégal, building reliable, scalable, production-grade data pipelines — from API ingestion to cloud deployment on AWS, with a business-facing visualization layer for decision-makers.
+The underlying skills I already apply — ingestion, validation, automated collection, testing — are domain-agnostic. I have used them on financial data (FCFA exchange rates), agricultural data, and labour-market data.
 
-My flagship project focuses on fintech (exchange rate data for the WAEMU zone), but the underlying skills — ingestion, transformation, orchestration, ML, cloud — are domain-agnostic and directly transferable to other data-driven sectors (health, agriculture, public data, and beyond).
+This portfolio is a self-driven initiative, built progressively alongside my M1/M2 studies to gain the practical skills the job market expects — not coursework. Status per project is tracked honestly below.
 
-> This portfolio is a self-driven initiative, built progressively alongside my M1/M2 studies to gain the practical skills the job market expects — not coursework. Status per project is tracked honestly below.
+✅ Delivered
+🌾 agri-data-platform
 
----
+<<ONE-LINE DESCRIPTION: what data it ingests, what it produces, who it is for>>
 
-## 🎯 Flagship Project — FCFA Exchange Rate Decision Pipeline
+Stack: <<e.g. Python · ... · Streamlit / Power BI>>
+Highlights: <<2–3 concrete points: data sources, pipeline steps, dashboard>>
+Repo: <<link>>
+📥 P1 — FCFA Exchange Rate Ingestion
 
-### The Problem
+Python pipeline that collects daily XOF/USD, XOF/EUR and XOF/CNY exchange rates, validates them and stores them as Parquet. API client with retry logic and structured logging, Pydantic validation.
 
-Across Senegal and the WAEMU zone, economic actors (importing merchants, SMEs, families receiving remittances) face daily fluctuations of the FCFA against major currencies (USD, EUR, CNY). The lack of centralized historical data and accessible analysis tools prevents them from spotting trends and choosing the right moment for their currency exchange operations — decisions are often made blindly.
+Stack: Python · REST API · Pydantic · Parquet
+Repo: p1-fcfa-exchange-rate
+💼 Xarala Talent Camp — Radar Emploi & Compétences (Summer 2026)
 
-### The Solution
+Team project (Squad Cayor, 5 members) building an automated radar of job offers and in-demand skills in Senegal, to help training providers, students and recruiters see what the market actually asks for. Role: Data Lead (AI & Data Engineering lane).
 
-An automated pipeline that collects, validates, historizes, and surfaces daily exchange rate data (XOF/USD, XOF/EUR, XOF/CNY), making these trends visible and actionable — from raw API ingestion to a business-facing dashboard.
+Collection: daily automated scraping of 4 Senegalese job platforms, with a shared collector interface and robots.txt checks per source
+AI extraction: skills extracted from job descriptions with an LLM (Groq, Llama 3) and validated against a strict JSON schema with Pydantic
+Embeddings: multilingual sentence embeddings (384 dimensions) stored in Supabase (pgvector)
+Ingestion: validated offers sent to a FastAPI backend with duplicate detection
+Quality and operations: pytest suite (unit tests, mocked API tests, opt-in integration test), GitLab CI/CD, Discord notifications on pipeline success/failure
+Team workflow: Git flow with merge requests, code review by the project mentor, handover so a teammate can rerun the pipeline independently
+Stack: Python · BeautifulSoup · Pydantic · Groq API · sentence-transformers · FastAPI · Supabase/PostgreSQL · GitLab CI/CD · n8n (the web application was built by teammates)
+🔨 In Progress — Main Pipeline: Data Engineering & MLOps
 
-### The Impact
+One connected pipeline, from raw data to cloud production.
 
-Once historical data is collected and explored, the goal is to quantify the concrete gain available to users — for example, the average spread between the worst and best day of the month to exchange a given amount. This will be measured against real data, not assumed upfront.
+#	Project	Stack	Status
+P1	📥 FCFA Exchange Rate Ingestion	Python · REST API · Pydantic · Parquet	✅ Done
+P2	🔄 Data Transformation Layer	dbt (DuckDB for dev, PostgreSQL for prod) · 3-layer architecture	🔨 In progress
+—	🔍 Exploratory Data Analysis	Streamlit	⏳ Planned
+P3	⚙️ Pipeline Orchestration	Apache Airflow · Docker	⏳ Planned
+—	📊 Business Dashboard	Power BI (fed by the orchestrated, automated pipeline)	⏳ Planned
+P4	🤖 ML Model & Experiment Tracking	Scikit-learn · MLflow	⏳ Planned
+P5	🚀 Model Deployment API	FastAPI · Docker	⏳ Planned
+P6	☁️ End-to-End Cloud Pipeline	AWS S3 · Glue · Athena · Redshift	⏳ Planned
 
-### Why USD, EUR & CNY
+The logic: P1 feeds P2 → transformed data is explored via Streamlit (EDA: means, volatility, trends) for manual validation → P3 automates P1+P2, so the pipeline runs on a schedule rather than manual triggers → once automated, it feeds the Power BI business dashboard, reflecting a live pipeline rather than a manual snapshot → P4 (ML) is trained on the transformed data → P5 deploys P4 → P6 migrates the full pipeline to AWS, in preparation for the AWS Certified Data Engineer – Associate certification.
 
-The FCFA is pegged to the euro at a fixed parity guaranteed by the French Treasury, so XOF/EUR is structurally low-volatility — it mainly serves as a stable reference point. The real dynamic to track is XOF/USD, since the FCFA fluctuates indirectly against the dollar via the EUR/USD rate. Senegal also has growing trade ties with China, particularly for imports — merchants often settle with suppliers in USD or CNY. The pipeline covers XOF/CNY as well, directly addressing this user segment.
+🧱 Roadmap — Big Data at Scale
 
----
+Planned: a pan-African e-commerce data platform (Airflow · Spark · Iceberg · dbt).
 
-## 🚀 Main Pipeline — Data Engineering & MLOps
+The main pipeline above runs on real but low-volume data. To demonstrate Big Data tooling at a realistic scale, this project will run on an independently generated, high-volume simulated dataset, orchestrated end to end: Airflow → Spark → Iceberg → dbt.
 
-**One connected pipeline, from raw data to cloud production.**
+This separation is deliberate: using Spark on a handful of daily rows would be technically unjustified. The project exists to show when and why these tools are used — not just that I can name them. It is scheduled after the main pipeline, once Data Engineering fundamentals (SQL, Python, the P1–P4 flow) are solidly in place.
 
-| # | Project | Stack | Status |
-|---|---|---|---|
-| P1 | [📥 FCFA Exchange Rate Ingestion](https://github.com/Aliou-THIELO/p1-fcfa-exchange-rate) | Python · REST API · Pydantic · Parquet | ✅ Done |
-| P2 | 🔄 Data Transformation Layer | dbt (DuckDB for dev, PostgreSQL for prod) · 3-layer architecture | ⏳ Planned |
-| — | 🔍 Exploratory Data Analysis | Streamlit | ⏳ Planned |
-| P3 | ⚙️ Pipeline Orchestration | Apache Airflow · Docker | ⏳ Planned |
-| — | 📊 Business Dashboard | Power BI (fed by the orchestrated, automated pipeline) | ⏳ Planned |
-| P4 | 🤖 ML Credit Scoring Model | Scikit-learn · MLflow | ⏳ Planned |
-| P5 | 🚀 Model Deployment API | FastAPI · Docker | ⏳ Planned |
-| P6 | ☁️ End-to-End Cloud Pipeline | AWS S3 · Glue · Athena · Redshift | ⏳ Planned |
+🛠️ Tech Stack
 
-**The logic:** P1 feeds P2 → transformed data is explored via Streamlit (EDA: means, volatility, trends) for manual validation → P3 automates P1+P2, so the pipeline runs on a schedule rather than manual triggers → once automated, it feeds the Power BI business dashboard, reflecting a live pipeline rather than a manual snapshot → P4 (ML) is trained on P2 data → P5 deploys P4 → P6 migrates the full pipeline to AWS, in preparation for the AWS Certified Data Engineer – Associate certification.
+Used in delivered projects
 
----
+Layer	Tools
+Ingestion	Python · REST API · BeautifulSoup · Pydantic · Parquet
+AI / NLP	Groq API (Llama 3) · sentence-transformers · pgvector
+Storage & API	PostgreSQL (Supabase) · SQL · FastAPI (as ingestion target)
+Testing & CI/CD	pytest · GitLab CI/CD
+Notifications	n8n · Discord
+Versioning	Git · GitHub · GitLab
 
-## 🧱 Big Data at Scale — Standalone Module
+Learning / on the roadmap
 
-**Independent technical demonstration — not part of the main data flow above.**
+Layer	Tools
+Transformation	dbt · DuckDB
+Exploration & Visualization	Streamlit · Power BI
+Orchestration	Apache Airflow · Docker
+Big Data	Apache Spark (PySpark) · Apache Iceberg
+ML & MLOps	Scikit-learn · MLflow · FastAPI (deployment)
+Cloud	AWS S3 · Glue · Athena · Redshift
+🎯 Domains of Application
 
-The pipeline above runs on real but low-volume data (one exchange rate per currency per day). To demonstrate Big Data tooling used in large financial institutions (banks, telcos) at a realistic scale, this module runs separately, on an independently generated, high-volume simulated dataset (via Mockaroo — high-frequency exchange transactions).
+Sector-neutral — applied so far to:
 
-| Project | Stack | Status |
-|---|---|---|
-| Big Data Ingestion & Processing at Scale | Apache NiFi · Apache Spark (PySpark) · Mockaroo | ⏳ Planned |
+🌾 Agricultural data — agri-data-platform
+💼 Labour-market data (job offers, skills demand) — Xarala Talent Camp
+📊 Financial data (FCFA exchange rates, WAEMU zone) — P1 delivered, P2 to P6 in progress / planned
 
-This separation is deliberate: using Spark on a handful of daily rows would be technically unjustified. This module exists to show *when* and *why* these tools are used — not just that I can name them. It is scheduled after the main pipeline, once Data Engineering fundamentals (SQL, Python, the full P1–P6 flow) are solidly in place.
+Open to: fintech and banking, agriculture, health, environment, public sector.
 
----
+☁️ Cloud data infrastructure on AWS — roadmap (P6)
 
-## 🛠️ Tech Stack
+The ingestion and validation approach is domain-agnostic — the same pipeline structure applies equally well to health, agricultural, or public-sector data.
 
-| Layer | Tools |
-|---|---|
-| Ingestion | Python · REST API · Pydantic · Parquet |
-| Transformation | dbt · DuckDB · PostgreSQL · SQL |
-| Exploration & Visualization | Streamlit · Power BI |
-| Orchestration | Apache Airflow · Docker |
-| Big Data (standalone module) | Apache NiFi · Apache Spark (PySpark) · Mockaroo |
-| ML & MLOps | Scikit-learn · MLflow · FastAPI |
-| Cloud | AWS S3 · Glue · Athena · Redshift |
-| Versioning | Git · GitHub |
-
----
-
-## 🎯 Domains of Application
-
-**Currently: Fintech & Banking — West Africa** *(illustrated by the flagship project above)*
-
-The flagship project targets real problems faced by financial institutions in Senegal and the WAEMU zone:
-
-- 📊 Financial data pipelines (exchange rates, transactions)
-- 🏦 Credit scoring for banking & microfinance
-- ☁️ Cloud-native data infrastructure on AWS
-- 🧱 Big Data tooling for high-volume, high-frequency financial data
-
-The pipeline architecture itself is domain-agnostic — the same ingestion → transformation → orchestration → ML → cloud approach applies equally well to health, agricultural, or public-sector data.
-
----
-
-## 📈 Current Focus
-
-- ✅ P1 complete — API client with retry logic and structured logging, Pydantic validation, Parquet export
-- 🔜 Starting P2 — dbt transformation layer on top of P1's Parquet output
+📈 Current Focus
+✅ agri-data-platform — <<final phase / delivered: one short line on status>>
+✅ Xarala Talent Camp — Radar Emploi & Compétences, internship completed
+🔨 P2 — dbt transformation layer (models and tests in progress)
+🔜 P3 — Airflow + Docker orchestration, then AWS Certified Data Engineer – Associate
 
 ## 📫 Let's Connect
 
