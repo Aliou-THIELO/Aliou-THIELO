@@ -22,39 +22,48 @@ The underlying skills I already apply — ingestion, validation, automated colle
 
 ## ✅ Delivered
 
-### 🌾 agri-data-platform
-[TO FILL: one line — what data it ingests, what it produces, who it is for]
+### 🌾 agri-data-platform — Force-N Data Engineering certificate
+End-to-end local data platform for a market-gardening farm in Senegal. Synthetic data on plots, weather, irrigation and harvests/sales is validated, ingested through a Bronze / Silver / Gold architecture and exposed as decision-support KPIs (irrigation efficiency, post-harvest loss rate, plot productivity) in a Grafana dashboard.
 
-- **Stack:** [TO FILL: tools actually used]
-- **Highlights:** [TO FILL: 2–3 concrete points — data sources, pipeline steps, dashboard]
-- **Repo:** [TO FILL: repo link]
+- **Highlights:**
+  - Medallion architecture with strictly typed schemas; rejected records are traced in a dedicated zone instead of being silently dropped
+  - Two-level data quality: Pydantic validation at generation (quarantine) and business-rule filtering inside the NiFi pipeline
+  - PostgreSQL star schema (3 dimensions, 3 fact tables) for analytics, MongoDB for time-series readings (weather, irrigation)
+  - Fully reproducible local environment with `docker compose up -d`
+- **Stack:** Python · Pydantic · Apache NiFi · MinIO · PostgreSQL (star schema) · MongoDB · Grafana · Docker Compose · pytest
+- **Repo:** [agri-data-platform](https://github.com/Aliou-THIELO/agri-data-platform)
 
 ### 📥 P1 — FCFA Exchange Rate Ingestion
-Python pipeline that collects daily XOF/USD, XOF/EUR and XOF/CNY exchange rates, validates them and stores them as Parquet. API client with retry logic and structured logging, Pydantic validation.
+Python pipeline that collects daily XOF/USD, XOF/EUR and XOF/CNY exchange rates, validates them and stores them as Parquet.
 
+- **Highlights:**
+  - API client with retry logic and structured logging
+  - Pydantic validation of every response before storage
+  - Parquet output consumed by the next project of the pipeline (P2)
 - **Stack:** Python · REST API · Pydantic · Parquet
 - **Repo:** [p1-fcfa-exchange-rate](https://github.com/Aliou-THIELO/p1-fcfa-exchange-rate)
 
 ### 💼 Xarala Talent Camp — Radar Emploi & Compétences (Summer 2026)
 Team project (Squad Cayor, 5 members) building an automated radar of job offers and in-demand skills in Senegal, to help training providers, students and recruiters see what the market actually asks for. **Role: Data Lead (AI & Data Engineering lane).**
 
-- **Collection:** daily automated scraping of 4 Senegalese job platforms, with a shared collector interface and `robots.txt` checks per source
-- **AI extraction:** skills extracted from job descriptions with an LLM (Groq, Llama 3) and validated against a strict JSON schema with Pydantic
-- **Embeddings:** multilingual sentence embeddings (384 dimensions) stored in Supabase (pgvector)
-- **Ingestion:** validated offers sent to a FastAPI backend with duplicate detection
-- **Quality and operations:** pytest suite (unit tests, mocked API tests, opt-in integration test), GitLab CI/CD, Discord notifications on pipeline success/failure
-- **Team workflow:** Git flow with merge requests, code review by the project mentor, handover so a teammate can rerun the pipeline independently
-- **Stack:** Python · BeautifulSoup · Pydantic · Groq API · sentence-transformers · FastAPI · Supabase/PostgreSQL · GitLab CI/CD · n8n *(the web application was built by teammates)*
+- **Highlights:**
+  - **Collection:** daily automated scraping of 4 Senegalese job platforms, with a shared collector interface and `robots.txt` checks per source
+  - **AI extraction:** skills extracted from job descriptions with an LLM (Groq, Llama 3) and validated against a strict JSON schema with Pydantic
+  - **Embeddings:** multilingual sentence embeddings (384 dimensions) stored in Supabase (pgvector)
+  - **Ingestion:** validated offers sent to a FastAPI backend with duplicate detection
+  - **Quality and operations:** pytest suite (unit tests, mocked API tests, opt-in integration test), GitLab CI/CD, Discord notifications on pipeline success/failure
+  - **Team workflow:** Git flow with merge requests, code review by the project mentor, handover so a teammate can rerun the pipeline independently
+- **Stack:** Python · BeautifulSoup · Pydantic · Groq API · sentence-transformers · FastAPI · GitLab CI/CD 
+- **Repo:** Team repository on GitLab (Xarala organisation)
 
 ---
 
 ## 🔨 In Progress — Main Pipeline: Data Engineering & MLOps
 
-**One connected pipeline, from raw data to cloud production.**
+**One connected pipeline, from raw data to cloud production, built on P1.**
 
 | # | Project | Stack | Status |
 |---|---|---|---|
-| P1 | [📥 FCFA Exchange Rate Ingestion](https://github.com/Aliou-THIELO/p1-fcfa-exchange-rate) | Python · REST API · Pydantic · Parquet | ✅ Done |
 | P2 | [🔄 Data Transformation Layer](https://github.com/Aliou-THIELO/p2-fcfa-dbt-transformation) | dbt (DuckDB for dev, PostgreSQL for prod) · 3-layer architecture | 🔨 In progress |
 | — | 🔍 Exploratory Data Analysis | Streamlit | ⏳ Planned |
 | P3 | ⚙️ Pipeline Orchestration | Apache Airflow · Docker | ⏳ Planned |
@@ -71,7 +80,7 @@ Team project (Squad Cayor, 5 members) building an automated radar of job offers 
 
 **Planned: a pan-African e-commerce data platform (Airflow · Spark · Iceberg · dbt).**
 
-The main pipeline above runs on real but low-volume data. To demonstrate Big Data tooling at a realistic scale, this project will run on an independently generated, high-volume simulated dataset, orchestrated end to end: Airflow → Spark → Iceberg → dbt.
+The main pipeline above runs on real but low-volume data. To demonstrate Big Data tooling at a realistic scale, this project will run on an independently generated, high-volume simulated dataset, orchestrated end to end: Airflow → Spark → Iceberg → dbt. It builds on the hands-on experience with NiFi and a medallion architecture from agri-data-platform.
 
 This separation is deliberate: using Spark on a handful of daily rows would be technically unjustified. The project exists to show *when* and *why* these tools are used — not just that I can name them. It is scheduled after the main pipeline, once Data Engineering fundamentals (SQL, Python, the P1–P4 flow) are solidly in place.
 
@@ -79,13 +88,17 @@ This separation is deliberate: using Spark on a handful of daily rows would be t
 
 ## 🛠️ Tech Stack
 
-**Used in delivered projects**
+**Used so far**
 
 | Layer | Tools |
 |---|---|
 | Ingestion | Python · REST API · BeautifulSoup · Pydantic · Parquet |
+| Integration & Data Lake | Apache NiFi · MinIO |
+| Databases | PostgreSQL (star schema, Supabase) · MongoDB · SQL |
+| Visualization | Grafana |
 | AI / NLP | Groq API (Llama 3) · sentence-transformers · pgvector |
-| Storage & API | PostgreSQL (Supabase) · SQL · FastAPI (as ingestion target) |
+| API | FastAPI (as ingestion target) |
+| Containers | Docker Compose |
 | Testing & CI/CD | pytest · GitLab CI/CD |
 | Notifications | n8n · Discord |
 | Versioning | Git · GitHub · GitLab |
@@ -96,7 +109,7 @@ This separation is deliberate: using Spark on a handful of daily rows would be t
 |---|---|
 | Transformation | dbt · DuckDB |
 | Exploration & Visualization | Streamlit · Power BI |
-| Orchestration | Apache Airflow · Docker |
+| Orchestration | Apache Airflow |
 | Big Data | Apache Spark (PySpark) · Apache Iceberg |
 | ML & MLOps | Scikit-learn · MLflow · FastAPI (deployment) |
 | Cloud | AWS S3 · Glue · Athena · Redshift |
@@ -121,16 +134,10 @@ The ingestion and validation approach is domain-agnostic — the same pipeline s
 
 ## 📈 Current Focus
 
-- ✅ agri-data-platform — [TO FILL: final phase / delivered — one short line]
+- ✅ agri-data-platform — Force-N certificate project completed
 - ✅ Xarala Talent Camp — Radar Emploi & Compétences, internship completed
 - 🔨 P2 — dbt transformation layer (models and tests in progress)
 - 🔜 P3 — Airflow + Docker orchestration, then AWS Certified Data Engineer – Associate
-
-## 📫 Let's Connect
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Aliou%20THIELO-0077B5?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/aliou-thielo-815bba389)
-[![Email](https://img.shields.io/badge/Email-thieloaliou25%40gmail.com-D14836?logo=gmail&logoColor=white)](mailto:thieloaliou25@gmail.com)
-[![GitHub](https://img.shields.io/badge/GitHub-Aliou--THIELO-181717?logo=github&logoColor=white)](https://github.com/Aliou-THIELO)
 
 ## 📫 Let's Connect
 
