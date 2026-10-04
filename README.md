@@ -1,8 +1,8 @@
 # Aliou THIELO — Data Engineer & MLOps 🇸🇳
 
-<p>🎓 M2 Modélisation Statistique et Informatique, option Data Science — Double Degree UCAD Dakar · Université de Lille, France</p>
-<p>🎓 Licence 3 Informatique, Systèmes d'Information — UGB</p>
-<p>📚 Data Engineering Training — Force-N Program</p>
+<p>🎓 M2 Statistical Modeling & Computer Science, Data Science track (<em>Modélisation Statistique et Informatique, option Data Science</em>) — Double Degree UCAD Dakar · Université de Lille, France</p>
+<p>🎓 Bachelor's degree (Licence 3) in Computer Science, Information Systems — UGB</p>
+<p>📚 Data Engineering Certificate Program — Force-N</p>
 <p>💼 Intern, AI & Data Engineering — Xarala Talent Camp, Summer 2026 (completed)</p>
 <p>📍 Dakar, Senegal</p>
 
